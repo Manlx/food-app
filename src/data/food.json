@@ -1,0 +1,16 @@
+{
+    "foodItems":[
+        {
+            "ProdName":"Strips",
+            "ProdPrice":45.00
+        },
+        {
+            "ProdName":"Chips",
+            "ProdPrice":15.00
+        },
+        {
+            "ProdName":"Sauce",
+            "ProdPrice":6.00
+        }
+    ]
+}
