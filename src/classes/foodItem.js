@@ -1,4 +1,4 @@
-class FoodItem{
+export default class FoodItem{
     ProdName = ""
     ProdPrice = 0
     constructor(ProdName, ProdPrice){

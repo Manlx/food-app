@@ -1,7 +1,11 @@
 <template>
   <div class="body">
-    {{this.FoodData.ProdName}}
-    {{this.Localization.Currency}}{{this.FoodData.ProdPrice}}
+    <div class="Name">
+      {{this.FoodData.ProdName}}
+    </div>
+    <div class="Cost">
+      {{this.Localization.Currency}}{{this.FoodData.ProdPrice}}
+    </div>
     <div class="removeButton" @click="this.removeClick"></div>
   </div>
 </template>
@@ -24,8 +28,8 @@ export default {
 
 <style scoped>
   .body{
-    padding: 3% 3%;
-    width: 94%;
+    padding: 2% 0%;
+    width: 100%;
     display: flex;
     justify-content: space-between;
   }
@@ -45,5 +49,14 @@ export default {
   .removeButton:hover{
     background-color: brown;
     border-radius: 10px;
+  }
+
+  .Name{
+    width: 60%;
+    /* background-color: aquamarine; */
+  }
+  .Cost{
+    width: 20%;
+    /* background-color: brown; */
   }
 </style>

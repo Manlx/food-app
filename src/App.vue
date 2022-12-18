@@ -17,7 +17,7 @@
       
     </div>
     
-   <add-food-item :FoodIn="this.foodItems" :Localization="this.localization" @RemoveFoodItem="this.removeFoodItem"/>
+   <add-food-item :FoodIn="this.foodItems" :Localization="this.localization" @RemoveFoodItem="this.removeFoodItem" @AddedItem="this.addFoodItem"/>
   </div>
 </template>
 
@@ -48,6 +48,9 @@ export default {
         cust.foodList.Delete(item);
       });
       this.foodItems.splice( this.foodItems.indexOf(item),1)
+    },
+    addFoodItem:function(item){
+      this.foodItems.push(item)
     }
   }
 }
