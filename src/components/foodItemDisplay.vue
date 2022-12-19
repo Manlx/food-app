@@ -13,9 +13,6 @@
 <script>
 export default {
     props:["FoodData","Localization"],
-    mounted:function(){
-        console.log(this.FoodData)
-    },
     methods:{
       removeClick:function(){
         if (!confirm("Removing will remove it from customer orders"))

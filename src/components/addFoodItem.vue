@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="titleHolder" :class="{compressed:!this.collapsed}" @click="this.collapsed = !this.collapsed">
+    <div class="itemsHolder" :class="{compressed:!this.collapsed}" @click="this.collapsed = !this.collapsed">
         Expand Food Items
     </div>
     <div class="itemsHolder" :class="{compressed:this.collapsed}">
@@ -39,16 +39,13 @@ export default {
   components: { foodItemDisplay },
     data:function(){
         return {
-            collapsed:false,
-            addItems:true,
+            collapsed:true,
+            addItems:false,
             prodID:"",
             prodCost:0
         }
     },
     props:["FoodIn","Localization"],
-    mounted:function(){
-        console.log(this.FoodIn)
-    },
     methods:{
         removeItem:function(Item){
             this.$emit("RemoveFoodItem",Item)
@@ -65,19 +62,7 @@ export default {
 </script>
 
 <style scoped>
-    .titleHolder{
-        font-size: 1.5rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: #454545;
-        padding: 5% 5%;
-        border-radius: 30px;
-        border: #565656 solid 10px;
-    }
-
     .itemsHolder{
-        font-size: 5rem;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -90,12 +75,11 @@ export default {
     }
 
     .minimizeBox{
-        font-size: 1.2rem;
-        /* padding: 1% 3%; */
+        font-size: 1rem;
         padding: 1% 5%;
         border: #232323 solid 2vw;
         background-color: #121212;
-        border-radius: 10px;
+        border-radius: 1vw;
         transition: 1s;
     }
 

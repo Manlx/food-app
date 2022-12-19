@@ -9,4 +9,7 @@ export default class foodItemRegs{
     equals(foodItem){
         return (this.foodItem.ProdName == foodItem.ProdName) && (this.foodItem.ProdPrice == foodItem.ProdPrice)
     }
+    itemCost(){
+        return this.count * this.foodItem.ProdPrice;
+    }
 }

@@ -14,6 +14,14 @@ export default class foodItemRegsList{
         return false;
     }
 
+    calcCost(){
+        let Total = 0;
+        this.FIRArr.forEach(element => {
+            Total += element.itemCost();
+        });
+        return Total;
+    }
+
     /**
      * Returns a >= 0 int if found else -1.
      */
