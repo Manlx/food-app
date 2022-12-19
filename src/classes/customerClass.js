@@ -22,4 +22,7 @@ export default class customer{
     reduceProd(Prod){
         this.foodList.Reduce(Prod);
     }
+    removeProd(Prod){
+        this.foodList.Delete(Prod);
+    }
 }

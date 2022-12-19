@@ -6,8 +6,7 @@
       <div class="removeButton" @click="this.removeUser"></div>
     </div>
     <div class="FIDispHolder" :class="{minimized:!this.minimized}">
-      <div class="FIDisp" v-for="FI,index in userData.foodList.FIRArr" :key="index"><p class="FIDispName">{{FI.foodItem.ProdName}} ({{FI.count}})</p> <p class="FIDispCost">{{this.Localization.Currency}} {{FI.itemCost()}}</p> <div class="button addButton"></div><div class="button decreaseButton"></div>
-      <div class="button removeButton"></div></div>
+      <customer-inventory v-for="FI,index in userData.foodList.FIRArr" :FIin="FI" :key="index" :Localization="this.Localization" :User="this.userData" />
       <div class="optionsButton">
         <label for="foodItemSelect">Item :</label>
         <select id="foodItemSelect" v-model="this.selectedProd">
@@ -21,10 +20,12 @@
 </template>
 
 <script>
+import customerInventory from './customerInventory.vue';
 export default {
+  components: { customerInventory },
     props:["userData","Localization","serviceFee","products"],
     mounted:function(){
-      console.log(JSON.stringify(this.userData))
+      // console.log(JSON.stringify(this.userData))
     },
     methods:{
       removeUser:function(){
@@ -43,7 +44,7 @@ export default {
     },
     data:function(){
       return {
-        minimized:true,
+        minimized:false,
         selectedProd:0
       }
     }
@@ -95,34 +96,8 @@ export default {
     background-color: #343434;
   }
 
-  .FIDisp{
-    height: 1.5rem;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-  }
-
-  .FIDisp:nth-child(odd)
-  {
-    background-color: #343434;
-  }
-  
   .minimized{
     display: none;
-  }
-
-  .FIDispHolder{
-    padding: 2% 2%;
-  }
-
-  .FIDispName{
-    display: inline-flex;
-    width: 50%;
-  }
-
-  .FIDispCost{
-    display: inline-flex;
-    width: 20%;
   }
 
   .button{

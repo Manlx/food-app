@@ -36,7 +36,7 @@ export default {
     components: { customerDisplay },
     data:function(){
         return {
-            collapsed:false,
+            collapsed:true,
             addUser:false,
             userName:""
         }
