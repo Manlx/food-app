@@ -76,6 +76,7 @@ export default {
     .addItemBox{
         display: flex;
         flex-direction: column;
+        width: 100%;
     }
 
     .compressed{
@@ -96,6 +97,7 @@ export default {
     .addItemButtonHolder{
         margin: 1% 0%;
         display: flex;
+        width: 100%;
         justify-content: space-evenly;
     }
 

@@ -69,8 +69,6 @@ export default {
 </script>
 
 <style scoped>
-
-
     input{
         background-color: #232323;
         width: 60%;
@@ -95,6 +93,13 @@ export default {
 
     .userInputRow{
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
+        margin-bottom: 1vh;
+    }
+
+    .buttonHolder{
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
     }
 </style>
