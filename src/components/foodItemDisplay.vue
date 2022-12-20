@@ -25,12 +25,13 @@ export default {
 
 <style scoped>
   .body{
-    padding: 2% 1%;
+    padding: 2% 0%;
     height: 1rem;
-    width: 96%;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     background-color: var(--medGrey);
+    border-radius: 1vw;
   }
   .body:nth-child(odd){
     background-color: var(--darkGrey);
@@ -55,10 +56,9 @@ export default {
 
   .Name{
     width: 60%;
-    /* background-color: aquamarine; */
   }
+
   .Cost{
     width: 20%;
-    /* background-color: brown; */
   }
 </style>

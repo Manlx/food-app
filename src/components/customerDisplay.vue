@@ -1,6 +1,6 @@
 <template>
   <div class="body">
-    <div class="OverallDisplay" :class="{minimized:this.minimized}" @click="this.minimized = !this.minimized">
+    <div class="OverallDisplay" @click="this.$refs.UserOrderList.toggle()">
       <div class="NamDisp"><p>{{userData.name}}</p></div>
       <div class="CurrencyDisp">
         <p>
@@ -9,7 +9,7 @@
         </div>
       <div class="removeButton" @click="this.removeUser"></div>
     </div>
-    <div class="FIDispHolder" :class="{minimized:!this.minimized}">
+    <collapse-box :darken="true" :hideButton="true" ref="UserOrderList">
       <customer-inventory v-for="FI,index in userData.foodList.FIRArr" :FIin="FI" :key="index" :Localization="this.Localization" :User="this.userData" />
       <div class="optionsButton">
         <label for="foodItemSelect">Item :</label>
@@ -18,15 +18,19 @@
         </select>
         <div class="button addButton" @click="this.addProduct"></div>
       </div>
-    </div>
+    </collapse-box>
+    <!-- <div class="FIDispHolder" :class="{minimized:!this.minimized}">
+      
+    </div> -->
   </div>
   
 </template>
 
 <script>
+import CollapseBox from './collapseBox.vue';
 import customerInventory from './customerInventory.vue';
 export default {
-  components: { customerInventory },
+  components: { customerInventory, CollapseBox },
     props:["userData","Localization","serviceFee","products"],
     mounted:function(){
       // console.log(JSON.stringify(this.userData))
@@ -91,9 +95,10 @@ export default {
 
   .body{
     background-color: var(--darkGrey);
-    padding: 0% 2%;
     border-radius: 1vw;
-    margin: 2% 0%;
+    padding: 1% 1%;
+    width: 98%;
+    margin-bottom: 1%;
   }
 
   .minimized{

@@ -18,7 +18,6 @@
         <input type="number" v-model="this.serviceFee">
       </div>
     </div>
-    
     <add-food-item :FoodIn="this.foodItems" :Localization="this.localization" @RemoveFoodItem="this.removeFoodItem" @AddedItem="this.addFoodItem"/>
     <customer-management @removeSelectedUser="this.removeUser" :UsersData="this.customers" :Localization="this.localization" @addUserClick="this.addCustomer" :SerivceFee="this.serviceFee" :products="this.foodItems"/>
   </div>
@@ -26,26 +25,25 @@
 
 <script>
 import addFoodItem from './components/addFoodItem.vue'
-// import FoodData from "./data/food.json"
-// import customer from "./classes/customerClass.js";
+import ButtonComp from './components/buttonComp.vue';
+import ButtonGroup from './components/buttonGroup.vue';
+import CollapseBox from './components/collapseBox.vue';
 import CustomerManagement from './components/customerManagement.vue';
 import horseFood from "./data/horseFood.json";
-// import $ from "../node_modules/jquery/dist/jquery.js"
+import importedCurrencies from "./data/currencies.json"
 
 export default {
-  components: { addFoodItem, CustomerManagement },
+  components: { addFoodItem, CustomerManagement, CollapseBox, ButtonComp, ButtonGroup },
   name: 'App',
   data:function()
   {
     return {
+      btnTitles:["Gaming","Gamers","Perd"],
+      btnMeth:[()=>{alert("Gaming Gamers")},()=>{alert("Say my name")},()=>{confirm("Happy Now?")}],
       foodItems:[],
       customers:[],
       serviceFee:0,
-      Currencies:{
-        "ZAR":"R",
-        "USA":"$",
-        "EU":"€"
-      },
+      Currencies:importedCurrencies,
       localization:{
         Currency:"R"
       },
@@ -93,21 +91,13 @@ export default {
           this.deepCopyFood(horseFood.foodItems)
         break;
       }
-      // $.getJSON(`./${this.selectedPredata}`,
-      //   function (data) {
-      //     console.log(data)
-
-      //   }
-      // );
     },
     deepCopyFood:function(FoodIN)
     {
-      
       for( let i = 0; i < this.foodItems.length;i++)
       {
         this.foodItems.pop();
       }
-        
       for (let i = 0; i < FoodIN.length;i++)
         this.foodItems.push(FoodIN[i])
     }
@@ -134,10 +124,12 @@ export default {
     /* justify-content: center; */
     align-items: center;
   }
+
   .titleOptionHolder h1{
     width: 60%;
     font-size: 1rem;
   }
+
   .titleOptionHolder select{
     width: 60%;
     border:none;
@@ -145,6 +137,7 @@ export default {
     background-color: var(--buttonPurple);
     text-align: center;
   }
+
   .titleOptionHolder input{
     display: flex;
     width: 60%;
@@ -160,15 +153,14 @@ export default {
   }
 
   .minimizeBox{
-      padding: 2% 5%;
-      background-color: var(--buttonPurple);
-      border-radius: 1vw;
-      transition: 1s;
-      width: 20%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      
+    padding: 2% 5%;
+    background-color: var(--buttonPurple);
+    border-radius: 1vw;
+    transition: 1s;
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .OptionsHolder{

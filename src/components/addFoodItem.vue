@@ -1,22 +1,10 @@
 <template>
   <div>
-    <div class="itemsHolder" :class="{compressed:!this.collapsed}" @click="this.collapsed = !this.collapsed">
-        Expand Food Items
-    </div>
-    <div class="itemsHolder" :class="{compressed:this.collapsed}">
-        <div class="foodItemContainer">
-            <food-item-display :class="{compressed:addItems}" v-for="item,index in this.FoodIn" :key="index" :FoodData="item" :Localization="this.Localization" @removedClick="this.removeItem" />
-        </div>
-        
-        <div class="OptionsHolder" :class="{compressed:addItems}">
-            <div class="minimizeBox" @click="this.addItems = !this.addItems">
-                Add Item
-            </div>
-            <div class="minimizeBox" @click="this.collapsed = !this.collapsed">
-                Collapse
-            </div>
-        </div>
-        <div class="addItemBox" :class="{compressed:!this.addItems}">
+    <collapse-box :dispTitle="`Expand Food Items`">
+        <collapse-box :dispTitle="`View Food Items`" :darken="true" :marginSetting="`0% 0% 1% 0%`">
+            <food-item-display v-for="item,index in this.FoodIn" :key="index" :FoodData="item" :Localization="this.Localization" @removedClick="this.removeItem" />
+        </collapse-box>
+        <collapse-box :dispTitle="`Add Food Item`" :darken="true" :marginSetting="`0% 0% 1% 0%`" ref="addItemClose">
             <div class="AddItemSegment">
                 <label for="ProdID">Name:</label>
                 <input type="text" id="ProdID" v-model="this.prodID">
@@ -25,21 +13,20 @@
                 <label for="ProdCost">Cost:</label>
                 <input type="number" id="ProdCost" v-model="this.prodCost">
             </div>
-            <div class="addItemButtonHolder">
-                <div class="minimizeBox" @click="this.addItemClick">Add Item</div>
-                <div class="minimizeBox" @click="this.addItems = !this.addItems">Cancel</div>
-            </div>
-        </div>
-    </div>
+            <button-group :btnTitles="[`Add Item`]" :btnMethods="[this.addItemClick]" :marginSetting="`0% 0% 1% 0%`"/>
+        </collapse-box>
+    </collapse-box>
   </div>
 </template>
 
 <script>
 import foodItemDisplay from './foodItemDisplay.vue'
 import foodItem from "../classes/foodItem.js"
+import CollapseBox from './collapseBox.vue'
+import ButtonGroup from './buttonGroup.vue'
 
 export default {
-  components: { foodItemDisplay },
+  components: { foodItemDisplay, CollapseBox, ButtonGroup },
     data:function(){
         return {
             collapsed:true,
@@ -58,6 +45,7 @@ export default {
             this.prodID = "";
             this.prodCost = 0;
             this.addItems = !this.addItems;
+            this.$refs.addItemClose.toggle();
             this.$emit("AddedItem",FoodItemOut);
         }
     }
@@ -77,10 +65,6 @@ export default {
         display: flex;
         flex-direction: column;
         width: 100%;
-    }
-
-    .compressed{
-        display: none;
     }
 
     .AddItemSegment{

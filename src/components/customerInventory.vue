@@ -49,6 +49,7 @@ export default {
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    width: 100%;
   }
 
   .FIDisp:nth-child(odd)

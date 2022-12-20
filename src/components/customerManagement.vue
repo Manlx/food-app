@@ -1,43 +1,28 @@
 <template>
-    <div>
-        <div class="itemsHolder" :class="{minimized:!this.collapsed}" @click="this.collapsed = ! this.collapsed">
-            Expand Users
-        </div>
-        <div class="itemsHolder" :class="{minimized:this.collapsed}">
-            <div class="FillMax" :class="{minimized:this.addUser}">
-                <customer-display v-for="item,index in UsersData" :key="index" :userData="item" :Localization="this.Localization" @removeUser="this.removeUser" :serviceFee="this.SerivceFee" :products="this.products" @AddProduct="this.addProd"/>
-                <div class="OptionsHolder">
-                    <div class="minimizeBox" @click="this.closeClick" >Add</div>
-                    <div class="minimizeBox" @click="this.collapsed = !this.collapsed">Collapse</div>
-                </div>
-                
+    <collapse-box :dispTitle="`Expand Users`">
+        <collapse-box :darken="'true'" :dispTitle="`View Users`" :noMargin="true">
+            <customer-display v-for="item,index in UsersData" :key="index" :userData="item" :Localization="this.Localization" @removeUser="this.removeUser" :serviceFee="this.SerivceFee" :products="this.products" @AddProduct="this.addProd"/>
+        </collapse-box>
+        <collapse-box :dispTitle="'Add'" :darken="'true'" :noPadding="false" :marginSetting="'1% 0% 1% 0%'" ref="addUserBox">
+            <div class="userInputRow">
+                <label for="CustName">Name:</label>
+                <input type="text" id="CustName" v-model="this.userName">
             </div>
-            <div class="userInput" :class="{minimized:!this.addUser}">
-                <div class="userInputRow">
-                    <label for="CustName">Name:</label>
-                    <input type="text" id="CustName" v-model="this.userName">
-                </div>
-                <div class="buttonHolder">
-                    <div class="minimizeBox" @click="this.addUserClick">Add</div>
-                    <div class="minimizeBox" @click="this.closeClick">Close</div>
-                </div>
-                
-            </div>
-        </div>
-    </div>
-    
+            <button-group :btnTitles="[`Add`,`Cancel`]" :btnMethods="[this.addUserClick,this.cancelAddUser]" :marginSetting="'0% 0% 1% 0%'"/>
+        </collapse-box>
+    </collapse-box>
 </template>
 
 <script>
 import customerDisplay from './customerDisplay.vue'
 import customer from "./../classes/customerClass.js"
+import CollapseBox from './collapseBox.vue'
+import ButtonGroup from './buttonGroup.vue'
 
 export default {
-    components: { customerDisplay },
+    components: { customerDisplay, CollapseBox, ButtonGroup },
     data:function(){
         return {
-            collapsed:true,
-            addUser:false,
             userName:""
         }
     },
@@ -53,10 +38,12 @@ export default {
             let User = new customer(this.userName);
             this.userName = "";
             this.addUser = ! this.addUser;
+            this.$refs.addUserBox.toggle();
             this.$emit("addUserClick",User)
         },
-        closeClick:function(){
-            this.addUser = !this.addUser;
+        cancelAddUser:function(){
+            this.userName = "";
+            this.$refs.addUserBox.toggle();
         },
         addProd:function(user,prod)
         {
@@ -64,7 +51,6 @@ export default {
         }
     },
     props:["UsersData","Localization","SerivceFee","products"],
-    // emits:["removeSelectedUser"]
 }
 </script>
 
@@ -87,14 +73,11 @@ export default {
         height: 100%;
     }
 
-    .minimized{
-        display: none;
-    }
-
     .userInputRow{
         display: flex;
         justify-content: space-around;
-        margin-bottom: 1vh;
+        margin: 1% 0%;
+        width: 100%;
     }
 
     .userInputRow input{
