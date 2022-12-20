@@ -97,6 +97,10 @@ export default {
         margin-bottom: 1vh;
     }
 
+    .userInputRow input{
+        border: none;
+    }
+
     .buttonHolder{
         display: flex;
         justify-content: space-around;
