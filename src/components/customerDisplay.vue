@@ -1,8 +1,12 @@
 <template>
   <div class="body">
-    <div class="OveralDisplay" :class="{minimized:this.minimized}" @click="this.minimized = !this.minimized">
+    <div class="OverallDisplay" :class="{minimized:this.minimized}" @click="this.minimized = !this.minimized">
       <div class="NamDisp"><p>{{userData.name}}</p></div>
-      <div class="CurrencyDisp"><p>{{this.Localization.Currency+" "}}{{(userData.calcCost()*((100+this.serviceFee)/100)).toFixed(2) }}</p></div>
+      <div class="CurrencyDisp">
+        <p>
+          {{this.Localization.Currency+" "}}{{(userData.calcCost()).toFixed(2) }} * {{this.serviceFee}}% = 
+          {{this.Localization.Currency+" "}}{{(userData.calcCost()*((100+this.serviceFee)/100)).toFixed(2) }}</p>
+        </div>
       <div class="removeButton" @click="this.removeUser"></div>
     </div>
     <div class="FIDispHolder" :class="{minimized:!this.minimized}">
@@ -72,13 +76,13 @@ export default {
   .NamDisp{
     display: inline-flex;
     /* background-color: aquamarine; */
-    width: 50%;
+    width: 40%;
   }
 
   .CurrencyDisp{
     display: inline-flex;
     /* background-color: blueviolet; */
-    width: 30%;
+    width: 60%;
   }
 
   p{
@@ -86,14 +90,10 @@ export default {
   }
 
   .body{
-    background-color: #232323;
+    background-color: var(--darkGrey);
     padding: 0% 2%;
-    border-radius: 10px;
+    border-radius: 1vw;
     margin: 2% 0%;
-  }
-
-  .body:hover{
-    background-color: #343434;
   }
 
   .minimized{
@@ -131,6 +131,7 @@ export default {
     display: inline-flex;
     margin-left: 2%;
     margin-right: 2%;
+    width: 60%;
   }
 
   label{
@@ -141,19 +142,25 @@ export default {
     font-size: 1rem;
   }
 
-  .OveralDisplay{
+  .OverallDisplay{
     height: 2rem;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    background-color: var(--darkGrey);
   }
 
   .optionsButton{
     height: 1.5rem;
     display: flex;
     align-items: center;
-    width: 96%;
+    width: 100%;
+    margin-top: 1vh;
+    justify-content: space-between;
+    /* margin-bottom: 6vh; */
     /* background-color: darkslategray; */
     /* padding: 0% 2%; */
   }
+
+
 </style>

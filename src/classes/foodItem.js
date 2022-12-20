@@ -6,6 +6,6 @@ export default class FoodItem{
     constructor(ProdName, ProdPrice){
         this.ProdName = ProdName;
         this.ProdPrice = ProdPrice;
-        this.ProdID = IDGen++;
+        this.ProdID = FoodItem.IDGen++;
     }
 }

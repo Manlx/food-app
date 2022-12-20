@@ -1,32 +1,36 @@
 <template>
   <div>
     <div class="options">
-      <div class="optionHolder">
+      <div class="titleOptionHolder">
         <h1>Currency:</h1>
         <select name="" id="" v-model="this.localization.Currency">
-          <option value="R">ZAR</option>
-          <option value="$">US</option>
-          <option value="€">EU</option>
+          <option v-for="(item,key,index) in this.Currencies" :key="index" :value="item" >{{key}}</option>
         </select>
       </div>
-      
-      <div class="optionHolder">
+      <div class="titleOptionHolder">
+        <h1>Predefined:</h1>
+        <select name="" id="" v-model="this.selectedPredata" @change="this.selectPreDefValues">
+          <option v-for="(item,key,index) in this.Predata" :key="index" :value="item" >{{key}}</option>
+        </select>
+      </div>
+      <div class="titleOptionHolder">
         <h1>Service Fee (%):</h1>
         <input type="number" v-model="this.serviceFee">
       </div>
-      
     </div>
     
     <add-food-item :FoodIn="this.foodItems" :Localization="this.localization" @RemoveFoodItem="this.removeFoodItem" @AddedItem="this.addFoodItem"/>
-    <customer-management @removeSelectedUser="this.removeUser" :UsersData="this.customers" :Localization="this.localization" @addUserClick="this.addCustomer" :SerivceFee="this.serviceFee" :products="this.foodItems" @addProd="this.addProdToCust"/>
+    <customer-management @removeSelectedUser="this.removeUser" :UsersData="this.customers" :Localization="this.localization" @addUserClick="this.addCustomer" :SerivceFee="this.serviceFee" :products="this.foodItems"/>
   </div>
 </template>
 
 <script>
 import addFoodItem from './components/addFoodItem.vue'
-import FoodData from "./data/food.json"
-import customer from "./classes/customerClass.js";
+// import FoodData from "./data/food.json"
+// import customer from "./classes/customerClass.js";
 import CustomerManagement from './components/customerManagement.vue';
+import horseFood from "./data/horseFood.json";
+// import $ from "../node_modules/jquery/dist/jquery.js"
 
 export default {
   components: { addFoodItem, CustomerManagement },
@@ -34,21 +38,31 @@ export default {
   data:function()
   {
     return {
-      foodItems:FoodData.foodItems,
+      foodItems:[],
       customers:[],
       serviceFee:0,
+      Currencies:{
+        "ZAR":"R",
+        "USA":"$",
+        "EU":"€"
+      },
       localization:{
         Currency:"R"
-      }
+      },
+      Predata: {
+        "Horse And River":"horseFood.json",
+        "None":""
+      },
+      selectedPredata:""
     }
   },
   mounted: function(){
-    this.customers.push(new customer("Jaco"))
-    this.customers.push(new customer("Pieter"))
-    this.customers[0].foodList.AddFI(this.foodItems[0]);
-    this.customers[0].foodList.AddFI(this.foodItems[1]);
-    this.customers[0].foodList.AddFI(this.foodItems[2]);
-    this.customers[0].foodList.AddFI(this.foodItems[2]);
+    // this.customers.push(new customer("Jaco"))
+    // this.customers.push(new customer("Pieter"))
+    // this.customers[0].foodList.AddFI(this.foodItems[0]);
+    // this.customers[0].foodList.AddFI(this.foodItems[1]);
+    // this.customers[0].foodList.AddFI(this.foodItems[2]);
+    // this.customers[0].foodList.AddFI(this.foodItems[2]);
   },
   methods:{
     removeFoodItem:function(item){
@@ -70,53 +84,107 @@ export default {
     addCustomer:function(User){
       this.customers.push(User)
     },
-    addProdToCust:function(user,prod){
+    selectPreDefValues:function(){
+      if (this.selectedPredata == "")
+        return;
+      
+      switch (this.selectedPredata){
+        case "horseFood.json":
+          this.deepCopyFood(horseFood.foodItems)
+        break;
+      }
+      // $.getJSON(`./${this.selectedPredata}`,
+      //   function (data) {
+      //     console.log(data)
 
+      //   }
+      // );
+    },
+    deepCopyFood:function(FoodIN)
+    {
+      
+      for( let i = 0; i < this.foodItems.length;i++)
+      {
+        this.foodItems.pop();
+      }
+        
+      for (let i = 0; i < FoodIN.length;i++)
+        this.foodItems.push(FoodIN[i])
     }
   }
 }
 </script>
 
-<style scoped>
-  h1{
-    display: inline;
-    background-color: inherit;
-    font-size: 1.1rem;
-    margin: 0% 5%;
-  }
+<style >
 
   .options{
     display: flex;
     flex-direction: column;
     padding: 3% 3%;
-    background-color: #452323;
-    margin: 3% 3%;
-    border-radius: 20px;
+    background-color: var(--medGrey);
+    margin: 3% 1% 0 1%;
+    border-radius: 1vw;
   }
 
-  select{
-    background-color: #232323;
-    padding: 0% 3%;
-    margin: 0% 3%;
-    font-size: 1rem;
-  }
-
-  input{
-    font-size: 1rem;
-    width: 100%;
-    background-color: #232323;
-    height: 100%;
-  }
-
-  .optionHolder{
+  .titleOptionHolder{
     display: flex;
     width: 100%;
     margin: 2% 0%;
+    align-content: space-between;
     /* justify-content: center; */
     align-items: center;
+  }
+  .titleOptionHolder h1{
+    width: 60%;
+    font-size: 1rem;
+  }
+  .titleOptionHolder select{
+    width: 60%;
+    border:none;
+    /* background-color: var(--darkGrey); */
+    background-color: var(--buttonPurple);
+    text-align: center;
+  }
+  .titleOptionHolder input{
+    display: flex;
+    width: 60%;
+    border: none;
+    /* padding: 0; */
+    text-align: center;
+    /* background-color: var(--darkGrey); */
+    background-color: var(--buttonPurple);
   }
 
   option{
     font-size: 1rem;
+  }
+
+  .minimizeBox{
+      padding: 2% 5%;
+      background-color: var(--buttonPurple);
+      border-radius: 1vw;
+      transition: 1s;
+      width: 20%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      
+  }
+
+  .OptionsHolder{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+  }
+
+  .itemsHolder{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--medGrey);
+    padding: 1% 1%;
+    border-radius: 1vw;
+    margin: 1% 1%;
   }
 </style>

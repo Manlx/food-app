@@ -1,5 +1,4 @@
 <template>
-  <div>
     <div class="FIDisp"  >
       <p class="FIDispName">{{FIin.foodItem.ProdName}} ({{FIin.count}})</p>
       <p class="FIDispCost">{{this.Localization.Currency}} {{FIin.itemCost()}}</p>
@@ -7,13 +6,11 @@
       <div class="button decreaseButton" @click="this.decreaseProd"></div>
       <div class="button removeButton" @click="this.removeProd"></div>
     </div>
-    
-  </div>
 </template>
 
 <script>
 export default {
-  props:["FIin","Localization","User"],
+  props:["FIin","Localization","User","num"],
   methods:{
     addProd:function(){
       this.User.addProduct(this.FIin.foodItem);
@@ -39,7 +36,7 @@ export default {
 
   .FIDispName{
     display: inline-flex;
-    width: 50%;
+    width:90%;
   }
 
   .FIDispCost{
@@ -80,15 +77,15 @@ export default {
   }
 
   .addButton{
-    background-image: url('https://www.svgrepo.com/show/207531/plus.svg');
+    background-image: var(--addButtonSVG);;
     
   }
 
   .decreaseButton{
-    background-image: url('https://www.svgrepo.com/show/207550/minus.svg');
+    background-image: var(--decreaseButtonSVG);
   }
 
   .removeButton{
-    background-image: url('https://www.svgrepo.com/show/207510/cancel.svg');
+    background-image: var(--removeButtonSVG);
   }
 </style>

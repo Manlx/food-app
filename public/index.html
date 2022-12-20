@@ -11,16 +11,34 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
   <style>
+    :root{
+      --darkGrey:#262626;
+      --medGrey:#595959;
+      --lighterGrey:#8C8C8C;
+      --buttonPurple:#2C2559;
+      --removeButtonSVG  : url('https://www.svgrepo.com/show/207510/cancel.svg');
+      --addButtonSVG     : url('https://www.svgrepo.com/show/207531/plus.svg');
+      --decreaseButtonSVG: url('https://www.svgrepo.com/show/207550/minus.svg');
+    }
     *{
       font-family: 'Roboto', sans-serif;
       margin: 0;
       padding: 0;
       /* background-color: #232323; */
-      font-size: 1.5rem;
-      color: white;
+      /* font-size: 1rem; */
+      color: #F2F2F2;
     }
     body{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color:#121223;
+    }
+    #app{
       background-color: #121212;
+      height: 100vh;
+      width: 100vw;
+      /* aspect-ratio: 2/3; */
     }
   </style>
   <body>

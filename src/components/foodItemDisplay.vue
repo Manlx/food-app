@@ -25,21 +25,26 @@ export default {
 
 <style scoped>
   .body{
-    padding: 2% 0%;
-    width: 100%;
+    padding: 2% 1%;
+    height: 1rem;
+    width: 96%;
     display: flex;
     justify-content: space-between;
+    background-color: var(--medGrey);
+  }
+  .body:nth-child(odd){
+    background-color: var(--darkGrey);
   }
 
   .removeButton{
-    background-image: url('https://www.svgrepo.com/show/12848/x-symbol.svg');
-    width: 4vh;
+    background-image: var(--removeButtonSVG);
+    /* width: 4vh; */
+    height: 100%;
     background-size: 80% 80%;
     background-position: center;
     background-repeat: no-repeat;
     aspect-ratio: 1/1;
     display: inline-flex;
-    /* margin: 0% 0%; */
     transition: 1s;
   }
 

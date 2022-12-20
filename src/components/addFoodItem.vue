@@ -4,7 +4,10 @@
         Expand Food Items
     </div>
     <div class="itemsHolder" :class="{compressed:this.collapsed}">
-        <food-item-display :class="{compressed:addItems}" v-for="item,index in this.FoodIn" :key="index" :FoodData="item" :Localization="this.Localization" @removedClick="this.removeItem" />
+        <div class="foodItemContainer">
+            <food-item-display :class="{compressed:addItems}" v-for="item,index in this.FoodIn" :key="index" :FoodData="item" :Localization="this.Localization" @removedClick="this.removeItem" />
+        </div>
+        
         <div class="OptionsHolder" :class="{compressed:addItems}">
             <div class="minimizeBox" @click="this.addItems = !this.addItems">
                 Add Item
@@ -62,38 +65,12 @@ export default {
 </script>
 
 <style scoped>
-    .itemsHolder{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        background-color: #454545;
-        padding: 2% 2%;
-        border-radius: 30px;
-        border: #565656 solid 2vw;
-        margin: 2% 2%;
-    }
-
-    .minimizeBox{
-        font-size: 1rem;
-        padding: 1% 5%;
-        border: #232323 solid 2vw;
-        background-color: #121212;
-        border-radius: 1vw;
-        transition: 1s;
-    }
-
-    .minimizeBox:hover{
-        background-color: #787878;
-        color: white;
-    }
 
     .OptionsHolder{
         display: flex;
-        width: 100%;
-        /* justify-content: center; */
-        /* background-color: aqua; */
-        justify-content: space-between;
+        /* width: 100%; */
+        justify-content: space-around;
+        
     }
 
     .addItemBox{
@@ -119,7 +96,18 @@ export default {
     .addItemButtonHolder{
         margin: 1% 0%;
         display: flex;
-        justify-content: space-between;
+        justify-content: space-evenly;
     }
 
+    .foodItemContainer{
+        width: 100%;
+        border-radius: 1vw;
+        background-color: var(--darkGrey);
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 1vh;
+        padding: 1% 0%;
+    }
 </style>
