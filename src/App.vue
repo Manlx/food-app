@@ -20,6 +20,7 @@
     </div>
     <add-food-item :FoodIn="this.foodItems" :Localization="this.localization" @RemoveFoodItem="this.removeFoodItem" @AddedItem="this.addFoodItem"/>
     <customer-management @removeSelectedUser="this.removeUser" :UsersData="this.customers" :Localization="this.localization" @addUserClick="this.addCustomer" :SerivceFee="this.serviceFee" :products="this.foodItems"/>
+    <receipt-display :userData="this.customers" :Localization="this.localization" :serviceFee="this.serviceFee"/>
   </div>
 </template>
 
@@ -29,11 +30,13 @@ import ButtonComp from './components/buttonComp.vue';
 import ButtonGroup from './components/buttonGroup.vue';
 import CollapseBox from './components/collapseBox.vue';
 import CustomerManagement from './components/customerManagement.vue';
+import customer from "./classes/customerClass.js"
 import horseFood from "./data/horseFood.json";
 import importedCurrencies from "./data/currencies.json"
+import ReceiptDisplay from './components/receiptDisplay.vue';
 
 export default {
-  components: { addFoodItem, CustomerManagement, CollapseBox, ButtonComp, ButtonGroup },
+  components: { addFoodItem, CustomerManagement, CollapseBox, ButtonComp, ButtonGroup, ReceiptDisplay },
   name: 'App',
   data:function()
   {
@@ -55,12 +58,14 @@ export default {
     }
   },
   mounted: function(){
+    // this.selectPreDefValues();
     // this.customers.push(new customer("Jaco"))
     // this.customers.push(new customer("Pieter"))
-    // this.customers[0].foodList.AddFI(this.foodItems[0]);
+    
     // this.customers[0].foodList.AddFI(this.foodItems[1]);
     // this.customers[0].foodList.AddFI(this.foodItems[2]);
     // this.customers[0].foodList.AddFI(this.foodItems[2]);
+    // this.customers[0].foodList.AddFI(this.foodItems[0]);
   },
   methods:{
     removeFoodItem:function(item){

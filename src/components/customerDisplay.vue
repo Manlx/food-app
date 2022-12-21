@@ -7,9 +7,9 @@
           {{this.Localization.Currency+" "}}{{(userData.calcCost()).toFixed(2) }} * {{this.serviceFee}}% = 
           {{this.Localization.Currency+" "}}{{(userData.calcCost()*((100+this.serviceFee)/100)).toFixed(2) }}</p>
         </div>
-      <div class="removeButton" @click="this.removeUser"></div>
+      <div class="removeButton" @click.stop="this.removeUser"></div>
     </div>
-    <collapse-box :darken="true" :hideButton="true" ref="UserOrderList">
+    <collapse-box :darken="true" :hideButton="true" ref="UserOrderList" :noMargin="true" :noPadding="true">
       <customer-inventory v-for="FI,index in userData.foodList.FIRArr" :FIin="FI" :key="index" :Localization="this.Localization" :User="this.userData" />
       <div class="optionsButton">
         <label for="foodItemSelect">Item :</label>
@@ -162,10 +162,5 @@ export default {
     width: 100%;
     margin-top: 1vh;
     justify-content: space-between;
-    /* margin-bottom: 6vh; */
-    /* background-color: darkslategray; */
-    /* padding: 0% 2%; */
   }
-
-
 </style>

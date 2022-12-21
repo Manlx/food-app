@@ -9,14 +9,16 @@ import buttonComp from './buttonComp.vue'
 export default {
     methods:{
         calcBtnWidth:function(){
-            return (100)/this.btnTitles.length -this.btnTitles.length*10;
+            console.log((100 -this.btnTitles.length*this.gapSize)/this.btnTitles.length);
+            return (100 -this.btnTitles.length*this.gapSize)/this.btnTitles.length ;
         }
     },
     data:function(){
         return {
             styles:{
                 margin: this.marginSetting
-            }
+            },
+            gapSize:2
         }
     },
     components: { buttonComp },

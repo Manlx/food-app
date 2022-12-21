@@ -12,4 +12,14 @@ export default class foodItemRegs{
     itemCost(){
         return this.count * this.foodItem.ProdPrice;
     }
+    getFoodName(){
+        return this.foodItem.ProdName
+    }
+    getFoodCost(){
+        return this.foodItem.ProdPrice
+    }
+    itemCostServiceFee(serviceFee)
+    {
+        return this.itemCost()*(100+serviceFee)/100;
+    }
 }

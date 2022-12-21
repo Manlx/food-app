@@ -12,7 +12,6 @@ export default {
         }
     },
     mounted:function(){
-        console.log(this.givenWidth)
         if (!this.btnWidth)
             this.btnWidth = "20%"
     },
@@ -23,7 +22,7 @@ export default {
 <style>
     .btn{
         background-color: var(--buttonPurple);
-        padding: 2% 2%;
+        padding: 2% 0%;
         border-radius: 1vw;
     }
     .btn p {

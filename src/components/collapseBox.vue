@@ -18,7 +18,7 @@ export default {
         return {
             collapsed:true,
             controlBtns:["Collapse"],
-            controlMeths:[()=>{this.collapsed = !this.collapsed}],
+            controlMeths:[this.toggle],
             dispBoxClass:{
                 noMargin: this.noMargin,
                 noPadding: this.noPadding,
@@ -29,10 +29,21 @@ export default {
             }
         }
     },
-    props:["dispTitle","noMargin","noPadding","darken","marginSetting","hideButton"],
+    props:["dispTitle","noMargin","noPadding","darken","marginSetting","hideButton","onExpand","onCollapse"],
     methods:{
         toggle:function(){
             this.collapsed = !this.collapsed;
+            if (this.collapsed)
+            {
+                if (this.onCollapse)
+                    this.onCollapse() 
+                
+            }
+            else
+            {
+                if (this.onExpand)
+                    this.onExpand()
+            }
         }
     }
 }

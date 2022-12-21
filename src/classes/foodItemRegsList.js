@@ -4,13 +4,11 @@ export default class foodItemRegsList{
     constructor(){}
     Delete(FoodItem) {
         let index = this.Contains(FoodItem);
-        console.log(index)
         if (index >= 0)
         {
             this.FIRArr.splice(index,1)
             return true;
         }
-            
         return false;
     }
 
@@ -32,6 +30,9 @@ export default class foodItemRegsList{
         return -1;
     }
 
+    /**
+     * Reduced the spesified foodItem by a certain amount
+     */
     Reduce(foodItem, count = 1){
         let Index=  this.Contains(foodItem)
         if (Index >= 0)
@@ -42,6 +43,9 @@ export default class foodItemRegsList{
         }
     }
 
+    /**
+     * Increase or add a new food Item. 
+     */
     AddFI(foodItem,count = 1){
         if (count <= 0)
             return;
@@ -54,5 +58,28 @@ export default class foodItemRegsList{
         } 
         
         this.FIRArr.push(new FIR(foodItem,count));
+    }
+
+    /**
+     * Sorts Alphabetically 
+     */
+    sortAlpha(){
+        this.FIRArr.sort(({foodItem:{ProdName:a}},{foodItem:{ProdName:b}})=>{
+            a = a.toUpperCase();
+            b = b.toUpperCase();
+            return (a < b) ? - 1 :( a > b) ? 1 : 0;
+        });
+    }
+
+    sortCount(){
+        this.FIRArr.sort(({count:a},{count:b})=>{
+            return b - a; 
+        });
+    }
+
+    sortCost(){
+        this.FIRArr.sort((a,b)=>{
+            return b.itemCost() - a.itemCost();
+        })
     }
 }
