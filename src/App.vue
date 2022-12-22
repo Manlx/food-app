@@ -42,6 +42,7 @@ import ReceiptDisplay from './components/receiptDisplay.vue';
 
 import customer from "./classes/customerClass.js";
 import DataManager from "./classes/dataManagement.js";
+import foodItem from "./classes/foodItem.js";
 
 import horseFood from "./data/horseFood.json";
 import importedCurrencies from "./data/currencies.json"
@@ -113,7 +114,10 @@ export default {
       
       switch (this.selectedPredata){
         case "horseFood.json":
-          this.deepCopyFood(horseFood.foodItems)
+          {
+            foodItem.IDGen = horseFood.foodItems.length;
+            this.deepCopyFood(horseFood.foodItems)
+          }
         break;
       }
     },
@@ -143,12 +147,13 @@ export default {
         if (this.DManager.latestStored.length < 5)
           return;
         let temp = JSON.parse(this.DManager.latestStored);
+        this.selectedPredata = temp.selectedPredata;
         this.customers = temp.customers;
         this.foodItems = temp.foodItems;
         this.serviceFee = temp.serviceFee;
-        this.selectedPredata = temp.selectedPredata;
         // console.log(this.customers);
         this.customerReconstruction();
+        // console.log(JSON.stringify(this.foodItems))
         console.log("Loading Data");
       }
     },
@@ -163,7 +168,7 @@ export default {
         let tempCust = new customer(custo.name)
         
         custo.foodList.FIRArr.forEach((FIR)=>{
-          tempCust.addProduct(self.findFoodItemByID(FIR.foodItem.ProdID))
+          tempCust.addProduct(self.findFoodItemByID(FIR.foodItem.ProdID),FIR.count)
         })
         Cust.push(tempCust);
       })
