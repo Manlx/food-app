@@ -22,4 +22,7 @@ export default class foodItemRegs{
     {
         return this.itemCost()*(100+serviceFee)/100;
     }
+    getFoodID(){
+        return this.foodItem.ProdID;
+    }
 }

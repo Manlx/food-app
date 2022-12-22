@@ -16,11 +16,11 @@ export default class customer{
     equals(Custom){
         return this.name == Custom.name && this.ID == Custom.ID;
     }
-    addProduct(Prod){
-        this.foodList.AddFI(Prod);
+    addProduct(Prod,count = 1){
+        this.foodList.AddFI(Prod,count);
     }
-    reduceProd(Prod){
-        this.foodList.Reduce(Prod);
+    reduceProd(Prod,count = 1){
+        this.foodList.Reduce(Prod,count);
     }
     removeProd(Prod){
         this.foodList.Delete(Prod);

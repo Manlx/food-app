@@ -9,7 +9,6 @@ import buttonComp from './buttonComp.vue'
 export default {
     methods:{
         calcBtnWidth:function(){
-            console.log((100 -this.btnTitles.length*this.gapSize)/this.btnTitles.length);
             return (100 -this.btnTitles.length*this.gapSize)/this.btnTitles.length ;
         }
     },

@@ -1,5 +1,6 @@
 <template>
   <div>
+    
     <div class="options">
       <div class="titleOptionHolder">
         <h1>Currency:</h1>
@@ -21,6 +22,7 @@
     <add-food-item :FoodIn="this.foodItems" :Localization="this.localization" @RemoveFoodItem="this.removeFoodItem" @AddedItem="this.addFoodItem"/>
     <customer-management @removeSelectedUser="this.removeUser" :UsersData="this.customers" :Localization="this.localization" @addUserClick="this.addCustomer" :SerivceFee="this.serviceFee" :products="this.foodItems"/>
     <receipt-display :userData="this.customers" :Localization="this.localization" :serviceFee="this.serviceFee"/>
+    <button-group  :btnTitles="[`Save`,`Load`]" :btnMethods="[this.serializeData,this.deserializeData]"/>
   </div>
 </template>
 
@@ -30,7 +32,8 @@ import ButtonComp from './components/buttonComp.vue';
 import ButtonGroup from './components/buttonGroup.vue';
 import CollapseBox from './components/collapseBox.vue';
 import CustomerManagement from './components/customerManagement.vue';
-import customer from "./classes/customerClass.js"
+import customer from "./classes/customerClass.js";
+import DataManager from "./classes/dataManagement.js";
 import horseFood from "./data/horseFood.json";
 import importedCurrencies from "./data/currencies.json"
 import ReceiptDisplay from './components/receiptDisplay.vue';
@@ -41,8 +44,9 @@ export default {
   data:function()
   {
     return {
-      btnTitles:["Gaming","Gamers","Perd"],
-      btnMeth:[()=>{alert("Gaming Gamers")},()=>{alert("Say my name")},()=>{confirm("Happy Now?")}],
+      // btnTitles:["Gaming","Gamers","Perd"],
+      // btnMeth:[()=>{alert("Gaming Gamers")},()=>{alert("Say my name")},()=>{confirm("Happy Now?")}],
+      DManager: new DataManager(),
       foodItems:[],
       customers:[],
       serviceFee:0,
@@ -66,6 +70,7 @@ export default {
     // this.customers[0].foodList.AddFI(this.foodItems[2]);
     // this.customers[0].foodList.AddFI(this.foodItems[2]);
     // this.customers[0].foodList.AddFI(this.foodItems[0]);
+    // this.deserializeData();
   },
   methods:{
     removeFoodItem:function(item){
@@ -105,6 +110,47 @@ export default {
       }
       for (let i = 0; i < FoodIN.length;i++)
         this.foodItems.push(FoodIN[i])
+    },
+    serializeData:function(){
+      let CombinedObj = {
+        foodItems: this.foodItems,
+        customers: this.customers,
+        serviceFee: this.serviceFee,
+        selectedPredata: this.selectedPredata
+      }
+      console.log("Saving Data")
+      this.DManager.storedData(CombinedObj);
+      this.DManager.getStoredData();
+    },
+    deserializeData:function(){
+      this.DManager.getStoredData();
+      let temp = JSON.parse(this.DManager.latestStored);
+      this.customers = temp.customers;
+      this.foodItems = temp.foodItems;
+      this.serviceFee = temp.serviceFee;
+      this.selectedPredata = temp.selectedPredata;
+      // console.log(this.customers);
+      this.customerReconstruction();
+      console.log("Loading Data");
+    },
+    customerReconstruction:function(){
+      let Cust = [];
+      let self = this;
+      this.customers.forEach((custo) =>{
+        let tempCust = new customer(custo.name)
+        
+        custo.foodList.FIRArr.forEach((FIR)=>{
+          tempCust.addProduct(self.findFoodItemByID(FIR.foodItem.ProdID))
+        })
+        Cust.push(tempCust);
+      })
+      this.customers = Cust;
+    },
+    findFoodItemByID(ID){
+      for (let i = 0;i < this.foodItems.length;i++)
+        if (this.foodItems[i].ProdID == ID)
+          return this.foodItems[i];
+      return null;
     }
   }
 }
