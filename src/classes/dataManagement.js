@@ -18,12 +18,25 @@ export default class DataManager{
 
     getStoredData(){
         this.latestStored = document.cookie;
+        
         return this.latestStored != null;
     }
 
     storedData(data){
         let JSONData = JSON.stringify(data)
-        console.log(JSONData)
         document.cookie = JSONData;
+    }
+
+    clearData(){
+        document.cookie = `emptyCookie`;
+    }
+
+    checkForValidSave(){
+        try {
+            JSON.parse(document.cookie)
+            return true;
+        } catch (error) {
+            return false;
+        }
     }
 }

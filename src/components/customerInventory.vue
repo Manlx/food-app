@@ -23,7 +23,7 @@ export default {
     }
   },
   mounted:function(){
-    console.log(JSON.stringify(this.FIin))
+    // console.log(JSON.stringify(this.FIin))
   }
 }
 </script>

@@ -24,9 +24,14 @@ export default {
         background-color: var(--buttonPurple);
         padding: 2% 0%;
         border-radius: 1vw;
+        transition: 1s;
     }
     .btn p {
         width: 100%;
         text-align: center;
+    }
+    .btn:hover{
+        scale: 1.05;
+        filter: brightness(150%);
     }
 </style>

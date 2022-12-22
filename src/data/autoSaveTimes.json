@@ -1,0 +1,32 @@
+{
+    "Times":[
+        {
+            "Descript":"1 Second",
+            "Amount":"1000"
+        },
+        {
+            "Descript":"15 Seconds",
+            "Amount":"15000"
+        },
+        {
+            "Descript":"30 Seconds",
+            "Amount":"30000"
+        },
+        {
+            "Descript":"1 Minute",
+            "Amount":"60000"
+        },
+        {
+            "Descript":"3 Minute",
+            "Amount":"60000"
+        },
+        {
+            "Descript":"5 Minutes",
+            "Amount":"300000"
+        },
+        {
+            "Descript":"Manual",
+            "Amount":"-1"
+        }
+    ]
+}
