@@ -1,6 +1,7 @@
 <template>
     <div class="FIDisp"  >
-      <p class="FIDispName">{{FIin.foodItem.ProdName}} ({{FIin.count}})</p>
+      <p class="FIDispName">{{FIin.foodItem.ProdName}}</p>
+      <p class="FIDispCount">{{FIin.count}}x</p>
       <p class="FIDispCost">{{this.Localization.Currency}} {{FIin.itemCost()}}</p>
       <div class="button addButton" @click="this.addProd"></div>
       <div class="button decreaseButton" @click="this.decreaseProd"></div>
@@ -36,7 +37,10 @@ export default {
 
   .FIDispName{
     display: inline-flex;
-    width:90%;
+    width:80%;
+  }
+  .FIDispCount{
+    width: 10%;
   }
 
   .FIDispCost{
