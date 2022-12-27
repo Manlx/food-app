@@ -1,6 +1,5 @@
 <template>
   <div>
-    
     <div class="options">
       <div class="titleOptionHolder">
         <h1>Currency:</h1>
@@ -27,8 +26,9 @@
     </div>
     <add-food-item :FoodIn="this.foodItems" :Localization="this.localization" @RemoveFoodItem="this.removeFoodItem" @AddedItem="this.addFoodItem"/>
     <customer-management @removeSelectedUser="this.removeUser" :UsersData="this.customers" :Localization="this.localization" @addUserClick="this.addCustomer" :SerivceFee="this.serviceFee" :products="this.foodItems"/>
-    <receipt-display :userData="this.customers" :Localization="this.localization" :serviceFee="this.serviceFee"/>
-    <button-group v-if="this.autoSaveTime == -1" :btnTitles="[`Save`,`Load`,`Clear`]" :btnMethods="[this.serializeData,this.deserializeData,this.clearSavedData]"/>
+    <receipt-display :userData="this.customers" :Localization="this.localization" :serviceFee="this.serviceFee" :CollectedProduct="this.createPrdCllct"/>
+    <stats-block :CompleteFoodList="this.createPrdCllct" :customer-list="this.customers"/>
+    <button-group  v-if="this.autoSaveTime == -1" :btnTitles="this.manualButtons" :btnMethods="[this.serializeData,this.deserializeData,this.clearSavedData]"/>
   </div>
 </template>
 
@@ -39,17 +39,20 @@ import ButtonGroup from './components/buttonGroup.vue';
 import CollapseBox from './components/collapseBox.vue';
 import CustomerManagement from './components/customerManagement.vue';
 import ReceiptDisplay from './components/receiptDisplay.vue';
+import StatsBlock from './components/statsBlock.vue';
 
 import customer from "./classes/customerClass.js";
 import DataManager from "./classes/dataManagement.js";
 import foodItem from "./classes/foodItem.js";
+import foodItemRegsList from './classes/foodItemRegsList';
 
 import horseFood from "./data/horseFood.json";
 import importedCurrencies from "./data/currencies.json"
 import autoSaveTimes from "./data/autoSaveTimes.json"
 
+
 export default {
-  components: { addFoodItem, CustomerManagement, CollapseBox, ButtonComp, ButtonGroup, ReceiptDisplay },
+  components: { addFoodItem, CustomerManagement, CollapseBox, ButtonComp, ButtonGroup, ReceiptDisplay, StatsBlock },
   name: 'App',
   data:function()
   {
@@ -57,6 +60,7 @@ export default {
       DManager: new DataManager(),
       foodItems:[],
       customers:[],
+      manualButtons:[`Save`,`Load`,`Clear`],
       serviceFee:0,
       Currencies:importedCurrencies,
       localization:{
@@ -70,7 +74,18 @@ export default {
       autoSaveTime:30000,
       autoSaveTimes: autoSaveTimes,
       autoSaveCall:null,
-      debugMode:false
+      debugMode:false,
+    }
+  },
+  computed:{
+    createPrdCllct:function(){
+      let FIRlist = new foodItemRegsList()
+      this.customers.forEach(User => {
+          User.foodList.FIRArr.forEach(FIR => {
+              FIRlist.AddFI(FIR.foodItem,FIR.count)
+          });
+      });
+      return FIRlist;
     }
   },
   mounted: function(){
@@ -187,7 +202,8 @@ export default {
       if (this.autoSaveTime == -1) 
         return;
       this.autoSaveCall = setInterval(this.serializeData,this.autoSaveTime);
-    }
+    },
+    
   }
 }
 </script>

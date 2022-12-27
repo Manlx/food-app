@@ -3,10 +3,12 @@
         <div class="gridHolder">
             <div class="total title">Total</div>
             <div class="raw title">Brutto</div>
+            <div class="serviceTotal title">Service</div>
             <div class="complete title">Netto</div>
         </div>
         <div class="gridHolder">
             <div class="raw title">{{this.localization.Currency}} {{this.rawTotal}}</div>
+            <div class="serviceTotal title">{{this.localization.Currency}} {{(this.rawTotal*(this.serviceFee)/100).toFixed(2)}}</div>
             <div class="complete title">{{this.localization.Currency}} {{(this.rawTotal*(this.serviceFee+100)/100).toFixed(2)}}</div>
         </div>
         
@@ -33,7 +35,7 @@ export default {
     .gridHolder{
         display: grid;
         /* grid-template-columns: 3.5fr repeat(2,1fr); */
-        grid-template-columns: 65% 17.5% 17.5%;
+        grid-template-columns: 47.5% 17.5% 17.5% 17.5%;
         /* background-color: aquamarine; */
         /* padding: 0% 1%; */
     }
