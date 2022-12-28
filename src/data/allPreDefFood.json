@@ -1,0 +1,92 @@
+[
+    {
+        "Restaurant":"Horse and River",
+        "PredefinedFood":[
+            {
+                "FoodSectionName":"Platters",
+                "FoodData":[
+                    {
+                        "ProdName":"Hand-Cut Chips",
+                        "ProdPrice":15.00,
+                        "ProdID":0
+                    },
+                    {
+                        "ProdName":"Onion Rings",
+                        "ProdPrice":25.00,
+                        "ProdID":1
+                    },
+                    {
+                        "ProdName":"Sauce",
+                        "ProdPrice":6.00,
+                        "ProdID":2
+                    },
+                    {
+                        "ProdName":"Beef Ribs",
+                        "ProdPrice":47.00,
+                        "ProdID":3
+                    },
+                    {
+                        "ProdName":"Pork Ribs",
+                        "ProdPrice":50.00,
+                        "ProdID":4
+                    },
+                    {
+                        "ProdName":"Crmbd Chicken Strips(100g)",
+                        "ProdPrice":29.00,
+                        "ProdID":5
+                    },
+                    {
+                        "ProdName":"Crmbd Chicken Strips(200g)",
+                        "ProdPrice":45.00,
+                        "ProdID":5
+                    },
+                    {
+                        "ProdName":"Crmbd Calamari",
+                        "ProdPrice":47.00,
+                        "ProdID":6
+                    },
+                    {
+                        "ProdName":"Cheese Grillers",
+                        "ProdPrice":25.00,
+                        "ProdID":7
+                    },
+                    {
+                        "ProdName":"Crmbd Mushrooms",
+                        "ProdPrice":35.00,
+                        "ProdID":8
+                    },
+                    {
+                        "ProdName":"Samoosa's",
+                        "ProdPrice":35.00,
+                        "ProdID":9
+                    },
+                    {
+                        "ProdName":"Springrolls",
+                        "ProdPrice":32.00,
+                        "ProdID":10
+                    },
+                    {
+                        "ProdName":"Pork Belly",
+                        "ProdPrice":49.00,
+                        "ProdID":11
+                    },
+                    {
+                        "ProdName":"Grilled Buffalo Wings(2 Wings)",
+                        "ProdPrice":30.00,
+                        "ProdID":12
+                    },
+                    {
+                        "ProdName":"Grilled Buffalo Wings(4 Wings)",
+                        "ProdPrice":49.00,
+                        "ProdID":13
+                    },
+                    {
+                        "ProdName":"Chilli Cheese Bombs",
+                        "ProdPrice":40.00,
+                        "ProdID":14
+                    }
+                ]
+            }
+        ]
+    }
+]

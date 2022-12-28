@@ -8,6 +8,9 @@
         </select>
       </div>
       <div class="titleOptionHolder">
+        <pre-def-food />
+      </div>
+      <div class="titleOptionHolder">
         <h1>Predefined:</h1>
         <select name="" id="" v-model="this.selectedPredata" @change="this.selectPreDefValues">
           <option v-for="(item,key,index) in this.Predata" :key="index" :value="item" >{{key}}</option>
@@ -27,7 +30,7 @@
     <add-food-item :FoodIn="this.foodItems" :Localization="this.localization" @RemoveFoodItem="this.removeFoodItem" @AddedItem="this.addFoodItem"/>
     <customer-management @removeSelectedUser="this.removeUser" :UsersData="this.customers" :Localization="this.localization" @addUserClick="this.addCustomer" :SerivceFee="this.serviceFee" :products="this.foodItems"/>
     <receipt-display :userData="this.customers" :Localization="this.localization" :serviceFee="this.serviceFee" :CollectedProduct="this.createPrdCllct"/>
-    <stats-block :CompleteFoodList="this.createPrdCllct" :customer-list="this.customers"/>
+    <stats-block :CompleteFoodList="this.createPrdCllct" :customer-list="this.customers" v-if="false"/>
     <button-group  v-if="this.autoSaveTime == -1" :btnTitles="this.manualButtons" :btnMethods="[this.serializeData,this.deserializeData,this.clearSavedData]"/>
   </div>
 </template>
@@ -40,23 +43,28 @@ import CollapseBox from './components/collapseBox.vue';
 import CustomerManagement from './components/customerManagement.vue';
 import ReceiptDisplay from './components/receiptDisplay.vue';
 import StatsBlock from './components/statsBlock.vue';
+import PreDefFood from './components/preDefFood.vue';
 
 import customer from "./classes/customerClass.js";
 import DataManager from "./classes/dataManagement.js";
 import foodItem from "./classes/foodItem.js";
-import foodItemRegsList from './classes/foodItemRegsList';
+import foodItemRegsList from './classes/foodItemRegsList.js';
+
 
 import horseFood from "./data/horseFood.json";
 import importedCurrencies from "./data/currencies.json"
 import autoSaveTimes from "./data/autoSaveTimes.json"
+import foodListManager from './classes/foodListManager.js';
+
 
 
 export default {
-  components: { addFoodItem, CustomerManagement, CollapseBox, ButtonComp, ButtonGroup, ReceiptDisplay, StatsBlock },
+  components: { addFoodItem, CustomerManagement, CollapseBox, ButtonComp, ButtonGroup, ReceiptDisplay, StatsBlock, PreDefFood },
   name: 'App',
   data:function()
   {
     return {
+      FoodListManagerObj:  new foodListManager(),
       DManager: new DataManager(),
       foodItems:[],
       customers:[],
@@ -74,7 +82,7 @@ export default {
       autoSaveTime:30000,
       autoSaveTimes: autoSaveTimes,
       autoSaveCall:null,
-      debugMode:false,
+      debugMode:true,
     }
   },
   computed:{
@@ -98,6 +106,8 @@ export default {
     // this.customers[0].foodList.AddFI(this.foodItems[2]);
     // this.customers[0].foodList.AddFI(this.foodItems[0]);
     // this.deserializeData();
+    if (this.debugMode)
+      return;
     if (this.DManager.checkForValidSave())
       if( confirm("Saved Data Detected Proceed to Load?"))
         this.deserializeData();
@@ -239,6 +249,7 @@ export default {
     /* background-color: var(--darkGrey); */
     background-color: var(--buttonPurple);
     text-align: center;
+    border-radius: 1vw;
   }
 
   .titleOptionHolder input{
@@ -249,6 +260,7 @@ export default {
     text-align: center;
     /* background-color: var(--darkGrey); */
     background-color: var(--buttonPurple);
+    border-radius: 1vw;
   }
 
   option{

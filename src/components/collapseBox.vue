@@ -1,10 +1,10 @@
 <template>
     <div class="outerBox">
-        <div class="dispBox" :class="this.dispBoxClass" :style="this.styles" v-if="this.collapsed" @click="this.toggle()">
+        <div class="dispBox" :class="this.dispBoxClass" :style="this.styles" v-if="this.getCollapsed" @click="this.toggle()">
             <p>{{this.dispTitle}}</p>
         </div>
         <div class="dispBox" :class="this.dispBoxClass" :style="this.styles" v-else>
-            <slot />
+            <slot/>
             <button-group v-if="!this.hideButton" :btnMethods="this.controlMeths" :btnTitles="this.controlBtns"/>
         </div>
     </div>
@@ -16,7 +16,7 @@ export default {
   components: { buttonGroup },
     data:function(){
         return {
-            collapsed:true,
+            collapsed: true,
             controlBtns:["Collapse"],
             controlMeths:[this.toggle],
             dispBoxClass:{
@@ -29,8 +29,20 @@ export default {
             }
         }
     },
-    props:["dispTitle","noMargin","noPadding","darken","marginSetting","hideButton","onExpand","onCollapse"],
+    props:["dispTitle","noMargin","noPadding","darken","marginSetting","hideButton","onExpand","onCollapse","startOpen"],
+    computed:{
+        getCollapsed:function(){
+            // return true;
+            // if (this.startOpen == null || this.startOpen == undefined)
+            //     return this.collapsed
+            if (this.startOpen)
+                return !this.collapsed
+            else
+                return this.collapsed
+        }
+    },
     methods:{
+        
         toggle:function(){
             this.collapsed = !this.collapsed;
             if (this.collapsed)

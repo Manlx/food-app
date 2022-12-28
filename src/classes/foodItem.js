@@ -3,9 +3,14 @@ export default class FoodItem{
     ProdPrice = 0
     static IDGen = 0;
     ProdID = -1;
-    constructor(ProdName, ProdPrice){
+    PredefItem = false;
+    constructor(ProdName, ProdPrice, PredefItem = true,ID){
         this.ProdName = ProdName;
         this.ProdPrice = ProdPrice;
-        this.ProdID = FoodItem.IDGen++;
+        if (ID == null)
+            this.ProdID = FoodItem.IDGen++;
+        else
+            this.ProdID = ID;
+        this.PredefItem = PredefItem;
     }
 }

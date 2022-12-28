@@ -25,4 +25,7 @@ export default class foodItemRegs{
     getFoodID(){
         return this.foodItem.ProdID;
     }
+    toString(CurrencyChar = 'R'){
+        return `${this.foodItem.ProdName} ${CurrencyChar} ${this.itemCost()}`
+    }
 }
