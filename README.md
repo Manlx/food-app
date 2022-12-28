@@ -1,19 +1,3 @@
-# food-app
-
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+This branch is dedicated to creating and implementing a more
+robust food selector as well as a food management object.
+This is for in the long turn to cut down on boiler plate.
