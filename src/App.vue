@@ -32,6 +32,8 @@
     <receipt-display :userData="this.customers" :Localization="this.localization" :serviceFee="this.serviceFee" :CollectedProduct="this.createPrdCllct"/>
     <stats-block :CompleteFoodList="this.createPrdCllct" :customer-list="this.customers" v-if="false"/>
     <button-group  v-if="this.autoSaveTime == -1" :btnTitles="this.manualButtons" :btnMethods="[this.serializeData,this.deserializeData,this.clearSavedData]"/>
+    <!-- <mutli-select :arr="this.arr" :use-sub-button="true" @submitClick="this.temp"/> -->
+    <!-- <mutli-select :arr="this.arr" :use-sub-button="false" @inc-submit="this.temp"/> -->
   </div>
 </template>
 
@@ -44,6 +46,7 @@ import CustomerManagement from './components/customerManagement.vue';
 import ReceiptDisplay from './components/receiptDisplay.vue';
 import StatsBlock from './components/statsBlock.vue';
 import PreDefFood from './components/preDefFood.vue';
+import MutliSelect from './components/mutliSelect.vue';
 
 import customer from "./classes/customerClass.js";
 import DataManager from "./classes/dataManagement.js";
@@ -58,8 +61,9 @@ import foodListManager from './classes/foodListManager.js';
 
 
 
+
 export default {
-  components: { addFoodItem, CustomerManagement, CollapseBox, ButtonComp, ButtonGroup, ReceiptDisplay, StatsBlock, PreDefFood },
+  components: { addFoodItem, CustomerManagement, CollapseBox, ButtonComp, ButtonGroup, ReceiptDisplay, StatsBlock, PreDefFood, MutliSelect },
   name: 'App',
   data:function()
   {
@@ -83,6 +87,7 @@ export default {
       autoSaveTimes: autoSaveTimes,
       autoSaveCall:null,
       debugMode:true,
+      // arr:["Jan","san","Koos","Piet","Jaco","Franc","Planc","Jasmin","Suli","Dumo","Peter","Thato"]
     }
   },
   computed:{
@@ -114,6 +119,9 @@ export default {
     this.onAutoSaveChange();
   },
   methods:{
+    temp:function(data){
+      console.log(JSON.stringify(data))
+    },
     removeFoodItem:function(item){
       this.customers.forEach(cust => {
         cust.foodList.Delete(item);
